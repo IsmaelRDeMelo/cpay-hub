@@ -1,0 +1,19 @@
+version: '3.8'
+services:
+  web:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: ceapay_hub_web
+    ports:
+      - "3000:3000"
+    volumes:
+      # Monta o código fonte para refletir as alterações em tempo real
+      - ./src:/app/src
+      - ./public:/app/public
+    # Garante que o container continue rodando em modo interativo
+    stdin_open: true
+    tty: true
+    environment:
+      # Ajuda no hot-reloading em alguns sistemas
+      - CHOKIDAR_USEPOLLING=true
